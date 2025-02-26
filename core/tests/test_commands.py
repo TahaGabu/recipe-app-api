@@ -30,6 +30,6 @@ class CommandTest(SimpleTestCase):
         call_command("wait_for_db")
 
         self.assertEqual(patched_check.call_count, 6)
-        patched_check.assert_called_once_with(databases=[
-            'default'
-        ])
+
+        for call in patched_check.call_args_list:
+            self.assertEqual(call[1]['databases'], ['default'])
